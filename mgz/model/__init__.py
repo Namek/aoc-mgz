@@ -76,11 +76,17 @@ def parse_match(handle):
             if obj['object_id'] in TC_IDS:
                 pos_x = obj['position']['x']
                 pos_y = obj['position']['y']
+        if player['civilization_id'] == 38:
+            civ_name = 'Poles'
+        elif player['civilization_id'] == 39:
+            civ_name = 'Bohemians'
+        else:
+            civ_name = dataset['civilizations'][str(player['civilization_id'])]['name']
         players[player['number']] = Player(
             player['color_id'] + 1,
             player['name'].decode(encoding),
             consts['player_colors'][str(player['color_id'])],
-            dataset['civilizations'][str(player['civilization_id'])]['name'],
+            civ_name,
             Position(pos_x, pos_y),
             [
                 Object(
